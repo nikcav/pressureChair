@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pressure Chair</title>
+  </head>
+
+  <body>
+    <h1 style="font-family: 'Quicksand', sans-serif; text-align: center; font-size: 100px">YOU HAVE BEEN SITTING FOR</h1>
+    <h2 style="font-family: 'Quicksand', sans-serif; text-align: center; font-size: 100px"><h2>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      var seconds = 0, minutes = 0, hours = 0;
+      var timer;
+      // receive message from server to display
+      socket.on('timer-done', function(data) {
+        alert('You have been sitting for too long. Go take a walk!')
+      });
+
+      socket.on('timer-start', function(data) {
+        //console.log(data.value)
+
+        if(data.value){
+          timer = setInterval(add, 1000);
+        } else{
+          window.clearInterval(timer);
+          seconds = 0, minutes = 0, hours = 0;
+        }
+
+      });
+
+      var add = function() {
+        seconds++;
+        if (seconds >= 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes >= 60) {
+                minutes = 0;
+                hours++;
+            }
+        }
+
+        document.getElementsByTagName('h2')[0].innerHTML = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+      }
+    </script>
+  </body>
+</html>
