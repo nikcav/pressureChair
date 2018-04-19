@@ -2,7 +2,7 @@
 
 This project contains the Raspberry Pi/Arduino setup for a chair that has an FSR inside it that would send a notification to your computer after 30 minutes to let you know you've been sitting too long and should take a break. It also provides a webpage that shows a timer of how long the user has been sitting.
 
-The Pi has Node, Express, and Johnny-Five installed.
+The Pi has Node, Express, Johnny-Five, and Sockets installed.
 
 A force sensitive resistor is needed in conjunction with the Arduino.
 
